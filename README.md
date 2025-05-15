@@ -225,3 +225,89 @@ De acordo com o contrato, o estoque é fisicamente organizado da seguinte forma:
 - Produtos **vencidos não devem sair** do galpão.
 
 - Produtos **restritos disparam alerta** ao sair.
+
+---
+
+## Etapa 4: Modelagem da **Farmácia** e do **processo de Venda**
+
+### O que o contrato exige?
+
+1. Farmácias têm:
+- Estoque reduzido de medicamentos
+- Farmacêutico responsável
+- Funcionários que realizam vendas
+- Devem solicitar **reposição ao galpão** quando o estoque estiver zerado
+
+2. Vendas de medicamentos **restritos ou com receita** exigem:
+- Cadastro de receita (CRM, nome do médico e nome do paciente)
+
+3. O sistema deve ter:
+- **Calcular taxa de lucro**, que varia por produto
+- Agrupar os produtos de uma venda (como no caixa)
+- Registrar a venda (com data, cliente, funcionario, produtos vendidos)
+
+### Modelagem das Classes
+
+#### 1. Classe `Farmácia`:
+
+**Atributos (privados):**
+
+- ``ìd: String``
+- ``nome: String``
+- ``farmaceuticoResponsavel: String``
+- ``funcionarios: String[]``
+- ``estoque: map.Produto Integer`` 
+
+**Métodos esperados (públicos):**
+
+- ``Farmacia(id, nome, farmaceuticoResponsavel)``
+- ``adicionarFuncionario(String nome): void``
+- ``adicionarProduto(Produto produto, int quantidade): void``
+- ``venderProduto(Produto produto, int quantidade, Receita receita, String funcionario): Venda``
+- ``reporEstoque(Produto produto, int quantidade): void``
+- ``getEstoque(): map.Produto Integer``
+
+#### 2. Classe `Venda`
+
+**Atributos (privados):**
+
+- ``id: int``
+- ``produtosVendidos: Produto[]``
+- ``data: LocalDateTime``
+- ``receita: Receita (opcional, pode ser null)``
+- ``valorTotal: double``
+
+**Métodos esperados (públicos):**
+
+- ``Venda(id, produtos, datam funcionario, receita)``
+- ``calcularValorTotal(): double``
+- ``getData(): LocalDateTime``
+- ``getProdutosVendidos: Produto[]``
+- ``getFuncionario(): String``
+- ``getReceita(): Receita``
+
+### Validações no precesso de venda
+
+- Se o produto for vencido, **não pode vender**
+- Se for **medicamento com receita** ou **restrito**, deve **fornecer Receita válida**
+- **Restritos disparam alerta**
+- Após a venda, o estoque da farmácia é atualizado
+- Se o estoque chegar a zero, é possível chamar `reporEstoque()` (futura integração com galpão)
+
+### Sobre o lucro
+
+- o lucro de cada produto é calculado por:
+
+```
+precoVenda = precoCusto + (precoCusto * taxaLucro) + (precoCusto * aliquataEstado)
+```
+
+### Sobre a receita
+
+Já temos a classe `Receita` com:
+
+- ``nomeMedico: String``
+- ``crm: String``
+- ``nomePaciente: String``
+
+Ela será passada como argumento apenas se o produto exigir receita.
