@@ -172,8 +172,8 @@ De acordo com o contrato, o estoque é fisicamente organizado da seguinte forma:
 - ``estado: String``
 - ``aliquota: double``
 - ``farmaceuticoResponsavel: String``
-- ``colaboradores: String[]``
-- ``ruas: String[]``
+- ``colaboradores: List<String>``
+- ``ruas: List<Rua>``
 
 **Métodos esperado (públicos):**
 
@@ -181,7 +181,7 @@ De acordo com o contrato, o estoque é fisicamente organizado da seguinte forma:
 - ``getId(): String``
 - ``getAliquota(): double``
 - ``getEstado(): String``
-- ``getRuas(): Rua[]``
+- ``getRuas(): List<Rua>``
 - ``adicionarRua(Rua rua): void``
 - ``adicionarColaborador(String nome): void``
 
@@ -190,13 +190,13 @@ De acordo com o contrato, o estoque é fisicamente organizado da seguinte forma:
 **Atributos (privados):**
 
 - ``identificador: String`` (ex: "AA")
-- ``enderecos: Endereco[]``
+- ``enderecos: List<Endereco>``
 
 **Métodos esperados (públicos):**
 
 - ``Rua(identificador)``
 - ``getIdentificador(): String``
-- ``getEnderecos(): Endereco[]``
+- ``getEnderecos(): List<Endereco>``
 - ``adicionarEndereco(Endereco e): void``
 
 #### 3. Classe `Endereco`
@@ -207,7 +207,7 @@ De acordo com o contrato, o estoque é fisicamente organizado da seguinte forma:
 - ``posicao: int (2 dígitos)``
 - ``altura: int (2 dígitos)``
 - ``possuiPrateleira: boolean``
-- ``produtos: Produto[]``
+- ``produtos: List<Produto>``
 
 **Métodos esperados (públicos):**
 
@@ -216,7 +216,7 @@ De acordo com o contrato, o estoque é fisicamente organizado da seguinte forma:
 - ``adicionarProduto(Produto p): boolean``
     - (retorna `false` se ultrapassar 20kg em prateleiras)
 - ``getPesoTotal(): double``
-- ``getProdutos(): Produto[]``
+- ``getProdutos(): List<Produto>``
 
 ## Validações importantes
 
@@ -255,17 +255,17 @@ De acordo com o contrato, o estoque é fisicamente organizado da seguinte forma:
 - ``ìd: String``
 - ``nome: String``
 - ``farmaceuticoResponsavel: String``
-- ``funcionarios: String[]``
-- ``estoque: map.Produto Integer`` 
+- ``funcionarios: List<String>``
+- ``estoque: Map<Produto, Integer>`` 
 
 **Métodos esperados (públicos):**
 
 - ``Farmacia(id, nome, farmaceuticoResponsavel)``
-- ``adicionarFuncionario(String nome): void``
-- ``adicionarProduto(Produto produto, int quantidade): void``
-- ``venderProduto(Produto produto, int quantidade, Receita receita, String funcionario): Venda``
-- ``reporEstoque(Produto produto, int quantidade): void``
-- ``getEstoque(): map.Produto Integer``
+- ``adicionarFuncionario (String nome): void``
+- ``adicionarProduto (Produto produto, int quantidade): void``
+- ``venderProduto (Produto produto, int quantidade, Receita receita, String funcionario): Venda``
+- ``reporEstoque (Produto produto, int quantidade): void``
+- ``getEstoque(): Map<Produto, Integer>``
 
 #### 2. Classe `Venda`
 
@@ -279,7 +279,7 @@ De acordo com o contrato, o estoque é fisicamente organizado da seguinte forma:
 
 **Métodos esperados (públicos):**
 
-- ``Venda(id, produtos, datam funcionario, receita)``
+- ``Venda(id, produtos, data, funcionario, receita)``
 - ``calcularValorTotal(): double``
 - ``getData(): LocalDateTime``
 - ``getProdutosVendidos: Produto[]``
