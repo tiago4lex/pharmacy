@@ -311,3 +311,54 @@ Já temos a classe `Receita` com:
 - ``nomePaciente: String``
 
 Ela será passada como argumento apenas se o produto exigir receita.
+
+---
+
+## Etapa 5: Abastecimento, Localização e Histórico de Vendas
+
+### O que o contrato especifica?
+
+1. Quanto um produto **acabar na farmácia**, eka deve **solicitar reposição** ao galpão
+2. Os **produtos nos galpões** estão armazenados em **endereços** (com código: duas letras da rua + dois números da posição + dois da altura)
+3. Produtos vencidos **não saem do galpão**
+4. **Produtos restritos exigem alerta antes de saírem do galpão**
+5. Galpões estão em **estados diferentes com alíquotas diferentes**
+6. É necessário que exista um **registro das vendas realizadas**
+
+### Atualização de classes e responsabilidade
+
+#### 1. Classe `Galpao`
+
+**Novos atributos (privados)**
+
+- ``estoque: Map<Endereco, Produto>``
+
+**Novos métodos (públicos)**
+
+- ``adicionarProduto(Endreco endereco, Produto produto): void``
+- ``fornecerProduto(String nomeProduto, int quantidade) List<Produto>``
+- ``verificarValidade(): void``
+
+#### 2. Classe `Endereco`
+
+**Novos atributos (privados)**
+
+- ``altura: int (0 = não é prateleira = espaço para pallets)``
+- ``pesoMaximo: double``
+
+**Novos métodos (públicos)**
+
+- ``Endereco(String rua, int posicao, int altura)``
+- ``isPrateleira(): boolean``
+
+#### 4. Classe `Farmacia`
+
+**Novos atributos (privados)**
+
+- ``historicoVendas: List<Venda>``
+- ``galpaoPrinciapal: Galpao``
+
+**Novos métodos (públicos)**
+
+- ``solicitarReposicao(String nomeProduto, int quantidade): void``
+- ``getHistoricoVendas(): List<Venda>`` → retorna ``historicoVendas``
