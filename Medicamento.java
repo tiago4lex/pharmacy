@@ -24,7 +24,7 @@ public abstract class Medicamento extends Produto {
         this.nomeMedico = nomeMedico;
     }
 
-    public String getNomePacienteI() {
+    public String getNomePaciente() {
         return nomePaciente;
     }
 
