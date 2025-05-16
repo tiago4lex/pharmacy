@@ -1,76 +1,84 @@
-import java.time.LocalDate;
-
-public class Produto{
+public class Produto {
     private String nome;
     private double precoCusto;
     private double taxaLucro;
-    private Localdate validade;
+    private Data validade;
     private int quantidade;
+    private String tipo;
     private double peso;
 
-
-    public Produto(String nome, double precoCusto, double taxaLucro, Localdate validade, int quantidade){
+    public Produto(String nome, double precoCusto, double taxaLucro, Data validade, int quantidade, String tipo, double peso) {
         this.nome = nome;
-        if(precoCusto >= 0){
+        if (precoCusto >= 0) {
             this.precoCusto = precoCusto;
             System.out.println("Preço de custo precisa ser maio que 0!");
-        } else{
+        } else {
             this.precoCusto = 0;
         }
-        if(taxaLucro > 0){
+
+        if (taxaLucro > 0) {
             this.taxaLucro = taxaLucro;
             System.out.println(("Taxa de lucro precisa ser maior que 0!"));
-        } else{
+        } else {
             this.taxaLucro = 0;
         }
+
         this.validade = validade;
-        if(quantidade >= 0){
+
+        if (quantidade >= 0) {
             this.quantidade = quantidade;
-        } else{
+        } else {
             this.quantidade = 0;
             System.out.println("Quantidade informada não pode ser menor que 0!");
         }
-        if(peso > 0){
+
+        this.tipo = tipo;
+
+        if (peso > 0) {
             this.peso = peso;
-        } else{
+        } else {
             this.peso = 0;
             System.out.println("Peso informado invalido!");
         }
     }
 
-    public String getNome(){
-
+    public String getNome() {
+        return nome;
     }
 
-    public double getPrecoCusto(){
-
+    public double getPrecoCusto() {
+        return precoCusto;
     }
 
-    public double gettaxaLucro(){
-
+    public double gettaxaLucro() {
+        return taxaLucro;
     }
 
-    public LocalDate getValidade(){
-
+    public Data getValidade() {
+        return validade;
     }
 
-    public int getQuantidade(){
-
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public double getPeso(){
-
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setQuantidade(int quantidade){
-
+    public double getPeso() {
+        return peso;
     }
 
-    public double calcularPrecoVenda(double aliquota){
-
+    public void setQuantidade(int quantidade) {
+        this.quantidade = novaQuantidade;
     }
 
-    public boolean estaVencido(){
-        
+    public double getPrecoVenda() {
+        return precoCusto + (precoCusto * taxaLucro);
+    }
+
+    public boolean estaVencido() {
+        return validade.isAnterior(Data.hoje());
     }
 }
