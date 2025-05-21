@@ -9,11 +9,11 @@ public class Produto {
 
     public Produto(String nome, double precoCusto, double taxaLucro, Data validade, int quantidade, String tipo, double peso) {
         this.nome = nome;
-        if (precoCusto >= 0) {
+        if (precoCusto > 0) {
             this.precoCusto = precoCusto;
-            System.out.println("Preço de custo precisa ser maio que 0!");
         } else {
             this.precoCusto = 0;
+            System.out.println("Preço de custo precisa ser maior que 0!");
         }
 
         if (taxaLucro > 0) {
@@ -50,7 +50,7 @@ public class Produto {
         return precoCusto;
     }
 
-    public double gettaxaLucro() {
+    public double getTaxaLucro() {
         return taxaLucro;
     }
 
@@ -71,7 +71,7 @@ public class Produto {
     }
 
     public void setQuantidade(int quantidade) {
-        this.quantidade = novaQuantidade;
+        this.quantidade = quantidade;
     }
 
     public double getPrecoVenda() {
