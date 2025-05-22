@@ -1,21 +1,26 @@
+import java.util.List;
+import java.util.Map;
+import java.util.*;
+
 public class Galpao {
     private String id;
     private String estado;
     private double aliquota;
     private String farmaceuticoResponsavel;
-    private String colaboradores[];
-    private Map estoque;
+    private List<String> colaboradores;
+    private List<Rua> ruas;
+    private Map<Endereco, Produto> estoque;
 
-    public Galpao(String id, String estado, double aliquota, String farmaceuticoResponsavel, String colaboradores, Map estoque){
+    public Galpao(String id, String estado, double aliquota, String farmaceuticoResponsavel) {
         this.id = id;
         this.estado = estado;
         this.aliquota = aliquota;
         this.farmaceuticoResponsavel = farmaceuticoResponsavel;
-        this.colaboradores = colaboradores;
-        this.estoque = estoque;
-        }
+        this.colaboradores = new ArrayList<>();
+        this.ruas = new ArrayList<>();
+        this.estoque = new HashMap<>();
     
-    public String etId(){
+    public String getId(){
         return this.id;
     }
 
@@ -27,8 +32,8 @@ public class Galpao {
         return this.estado;
     }
 
-    public String[] getRuas(){
-        
+    public List<Rua> getRuas() {
+        return ruas;
     }
 
     public void adiocionarProduto(Endereco endereco, Produto produto){
@@ -43,12 +48,34 @@ public class Galpao {
 
     }
 
-    public void adicionarRua(Rua rua){
-
+    public void adicionarRua(Rua rua) {
+        ruas.add(rua);
     }
 
-    public void adicionarColaborador(String nome){
-
+    public void adicionarColaborador(String nome) {
+        colaboradores.add(nome);
     }
+
+    public void adicionarProduto(Endereco endereco, Produto produto) {
+        if (!produto.estaVencido()) {
+            estoque.put(endereco, produto);
+        } else {
+            System.out.println("Produto vencido. Não pode ser adicionado ao estoque.");
+        }
+    }
+
+    public void fornecerProduto(String nomeProduto, int quantidade) {
+        // Lógica ainda será implementada (sugestão: percorrer o Map e coletar produtos válidos)
+        System.out.println("Função fornecerProduto ainda não implementada.");
+    }
+
+    public void verificarValidade() {
+        for (Map.Entry<Endereco, Produto> entry : estoque.entrySet()) {
+            if (entry.getValue().estaVencido()) {
+                System.out.println("Produto vencido no endereço: " + entry.getKey().getCodigoEndereco());
+            }
+        }
+    }
+
 
 }
