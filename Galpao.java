@@ -65,7 +65,6 @@ public class Galpao {
     }
 
     public void fornecerProduto(String nomeProduto, int quantidade) {
-        // Lógica ainda será implementada (sugestão: percorrer o Map e coletar produtos válidos)
         System.out.println("Função fornecerProduto ainda não implementada.");
     }
 
