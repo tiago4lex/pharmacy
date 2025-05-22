@@ -1,5 +1,3 @@
-import java.util.List;
-import java.util.Map;
 import java.util.*;
 
 public class Galpao {
@@ -19,7 +17,8 @@ public class Galpao {
         this.colaboradores = new ArrayList<>();
         this.ruas = new ArrayList<>();
         this.estoque = new HashMap<>();
-    
+    }
+
     public String getId(){
         return this.id;
     }
@@ -34,18 +33,6 @@ public class Galpao {
 
     public List<Rua> getRuas() {
         return ruas;
-    }
-
-    public void adiocionarProduto(Endereco endereco, Produto produto){
-
-    }
-
-    public void fornecerProduto(String nomeProduto, int quantidade){
-
-    }
-
-    public void verificarValidade(){
-
     }
 
     public void adicionarRua(Rua rua) {
@@ -75,6 +62,4 @@ public class Galpao {
             }
         }
     }
-
-
 }
