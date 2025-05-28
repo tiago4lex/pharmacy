@@ -23,6 +23,10 @@ public class Galpao {
         return this.id;
     }
 
+    public String getFarmaceuticoResponsavel(){
+        return this.farmaceuticoResponsavel;
+    }
+
     public double getAliquota(){
         return this.aliquota;
     }
