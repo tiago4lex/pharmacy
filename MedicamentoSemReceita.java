@@ -1,12 +1,14 @@
-public abstract class MedicamentoSemReceita extends Medicamento {
+import java.time.LocalDate;
 
-    public MedicamentoSemReceita(String nome, double precoCusto, double taxaLucro, Data validade, int quantidade, String tipo,
-            double peso) {
-        super(nome, precoCusto, taxaLucro, validade, quantidade, tipo, peso);
+public class MedicamentoSemReceita extends Medicamento {
+
+    public MedicamentoSemReceita(String nome, double precoCusto, double taxaLucro,
+                                  LocalDate validade, int quantidade, double peso) {
+        super(nome, precoCusto, taxaLucro, validade, quantidade, peso);
     }
 
     @Override
-    public boolean precisaReceita(){
+    public boolean precisaReceita() {
         return false;
     }
 }

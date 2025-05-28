@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDateTime;
 
 public class Farmacia {
     private String id;
@@ -23,48 +24,53 @@ public class Farmacia {
     }
 
     public Venda venderProduto(Produto produto, int quantidade, Receita receita, String funcionario) {
-        if(produto.estaVencido()){
-            System.out.println("Produto vencido! Não pode ser vendido.");
-            return null;
-        }
-
-        if(produto.precisaReceita()){
-            if(receita == null ||
-               receita.getCrm() == null || receita.getCrm().isEmpty() ||
-               receita.getNomeMedico() == null || receita.getNomeMedico().isEmpty() || receita.getNomePaciente() == null || receita.getNomePaciente().isEmpty(){
-                System.out.println("Receita inválida ou incompleta. Venda não liberada!");
-                return null;
-               })
-        }
-
-        if(produto instanceof MedicamentoRestrito){
-            ((MedicamentoRestrito) produto).emitirAlerta();
-        }
-
-        int estoqueAtual = estoque.getOrDefault(produto, 0);
-        if(estoqueAtual < quantidade){
-            System.out.println("Estoque insuficiente para o produto: "+ produto.getNome());
-            return null;
-        }
-
-        estoque.put(produto, estoqueAtual - quantidade);
-
-        Produto[] produtosVendidos = new Produto[quantidade];
-        for(int i = 0 < quantidade; i ++){
-            produtosVendidos[i] = produto;
-        }
-
-        Venda venda = new Venda(
-            historicoVendas.size() + 1,
-            produtosVendidos,
-            LocalDateTime.now(),
-            funcionario,
-            receita
-        );
-
-        historicoVendas.add(venda);
-        return venda;
+    if (produto.estaVencido()) {
+        System.out.println("Produto vencido! Não pode ser vendido.");
+        return null;
     }
+
+    if (produto.precisaReceita()) {
+        if (receita == null ||
+            receita.getCrm() == null || receita.getCrm().isEmpty() ||
+            receita.getNomeMedico() == null || receita.getNomeMedico().isEmpty() ||
+            receita.getNomePaciente() == null || receita.getNomePaciente().isEmpty()) {
+            System.out.println("Receita inválida ou incompleta. Venda não liberada!");
+            return null;
+        }
+    }
+
+    if (produto instanceof MedicamentoRestrito) {
+        ((MedicamentoRestrito) produto).emitirAlerta();
+    }
+
+    int estoqueAtual = estoque.getOrDefault(produto, 0);
+        if(estoqueAtual < quantidade) {
+            System.out.println("Estoque insuficiente para o produto: " + produto.getNome());
+            return null;
+    }
+
+    estoque.put(produto, estoqueAtual - quantidade);
+
+    Produto[] produtosVendidos = new Produto[quantidade];
+    for (int i = 0; i < quantidade; i++) {
+        produtosVendidos[i] = produto;
+    }
+
+    double aliquota = (galpaoPrincipal != null) ? galpaoPrincipal.getAliquota() : 0;
+
+    Venda venda = new Venda(
+        historicoVendas.size() + 1,
+        produtosVendidos,
+        LocalDateTime.now(),
+        funcionario,
+        receita,
+        aliquota
+    );
+
+    historicoVendas.add(venda);
+    return venda;
+    }
+
 
     public void reporEstoque(Produto produto, int quantidade) {
         estoque.put(produto, estoque.getOrDefault(produto, 0) + quantidade);
