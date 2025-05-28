@@ -1,47 +1,23 @@
-public class Produto {
+import java.time.LocalDate;
+
+public abstract class Produto {
     private String nome;
     private double precoCusto;
     private double taxaLucro;
-    private Data validade;
+    private LocalDate validade;
     private int quantidade;
-    private String tipo;
     private double peso;
 
-    public Produto(String nome, double precoCusto, double taxaLucro, Data validade, int quantidade, String tipo, double peso) {
+    public Produto(String nome, double precoCusto, double taxaLucro, LocalDate validade, int quantidade, double peso) {
         this.nome = nome;
-        if (precoCusto > 0) {
-            this.precoCusto = precoCusto;
-        } else {
-            this.precoCusto = 0;
-            System.out.println("Preço de custo precisa ser maior que 0!");
-        }
-
-        if (taxaLucro > 0) {
-            this.taxaLucro = taxaLucro;
-            System.out.println(("Taxa de lucro precisa ser maior que 0!"));
-        } else {
-            this.taxaLucro = 0;
-        }
-
+        this.precoCusto = Math.max(precoCusto, 0);
+        this.taxaLucro = Math.max(taxaLucro, 0);
         this.validade = validade;
-
-        if (quantidade >= 0) {
-            this.quantidade = quantidade;
-        } else {
-            this.quantidade = 0;
-            System.out.println("Quantidade informada não pode ser menor que 0!");
-        }
-
-        this.tipo = tipo;
-
-        if (peso > 0) {
-            this.peso = peso;
-        } else {
-            this.peso = 0;
-            System.out.println("Peso informado invalido!");
-        }
+        this.quantidade = Math.max(quantidade, 0);
+        this.peso = Math.max(peso, 0);
     }
 
+    // Getters
     public String getNome() {
         return nome;
     }
@@ -54,16 +30,12 @@ public class Produto {
         return taxaLucro;
     }
 
-    public Data getValidade() {
+    public LocalDate getValidade() {
         return validade;
     }
 
     public int getQuantidade() {
         return quantidade;
-    }
-
-    public String getTipo() {
-        return tipo;
     }
 
     public double getPeso() {
@@ -74,11 +46,16 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public double getPrecoVenda() {
-        return precoCusto + (precoCusto * taxaLucro);
+    // Métodos obrigatórios para subclasses implementarem
+    public abstract boolean precisaReceita();
+
+    public double calcularPrecoVenda(double aliquota) {
+        return precoCusto +
+               (precoCusto * taxaLucro) +
+               (precoCusto * aliquota);
     }
 
     public boolean estaVencido() {
-        return validade.isAnterior(Data.hoje());
+        return validade.isBefore(LocalDate.now());
     }
 }
