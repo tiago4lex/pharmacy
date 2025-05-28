@@ -71,9 +71,13 @@ public class Farmacia {
     return venda;
     }
 
+    public void setGalpaoPrincipal(Galpao galpao) {
+    this.galpaoPrincipal = galpao;
+    }
 
     public void reporEstoque(Produto produto, int quantidade) {
-        estoque.put(produto, estoque.getOrDefault(produto, 0) + quantidade);
+    estoque.put(produto, estoque.getOrDefault(produto, 0) + quantidade);
+    System.out.println("Produto '" + produto.getNome() + "' reabastecido com " + quantidade + " unidades.");
     }
 
     public Map<Produto, Integer> getEstoque() {
@@ -87,4 +91,13 @@ public class Farmacia {
     public List<Venda> getHistoricoVendas() {
         return historicoVendas;
     }
+
+    public String getFarmaciaId(){
+        return this.id;
+    }
+
+    public String getFarmaciaNome(){
+        return this.nome;
+    }
+
 }
