@@ -12,7 +12,5 @@ public class MedicamentoRestrito extends Medicamento {
         return true;
     }
 
-    public void emitirAlerta() {
-        System.out.println("Atenção: Este medicamento é de uso restrito e exige receita médica.");
-    }
+    
 }

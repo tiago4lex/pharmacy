@@ -39,10 +39,6 @@ public class Farmacia {
         }
     }
 
-    if (produto instanceof MedicamentoRestrito) {
-        ((MedicamentoRestrito) produto).emitirAlerta();
-    }
-
     int estoqueAtual = estoque.getOrDefault(produto, 0);
         if(estoqueAtual < quantidade) {
             System.out.println("Estoque insuficiente para o produto: " + produto.getNome());
@@ -99,5 +95,27 @@ public class Farmacia {
     public String getFarmaciaNome(){
         return this.nome;
     }
+
+    public void exibirHistoricoVendas() {
+    System.out.println("\n -- Histórico de Vendas -- \n");
+    for (Venda venda : historicoVendas) {
+        System.out.println("Venda ID: " + venda.getId()
+            + " | Funcionário: " + venda.getFuncionario()
+            + " | Data: " + venda.getData()
+            + " | Valor : R$ " + String.format("%.2f", venda.getValorTotal()));
+    }
+
+    }
+
+    public void setFarmaceuticoResponsavel(String novoFarmaceutico) {
+    if (novoFarmaceutico != null && !novoFarmaceutico.trim().isEmpty()) {
+        this.farmaceuticoResponsavel = novoFarmaceutico;
+        System.out.println("Novo farmacêutico responsável: " + novoFarmaceutico);
+    } else {
+        System.out.println("Nome inválido para farmacêutico responsável.");
+    }
+    }
+
+
 
 }

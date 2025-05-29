@@ -46,9 +46,6 @@ public class Main{
 
 
         //Historico de Vendas
-        System.out.println("\n -- Historico de vendas -- \n");
-        for(Venda venda: farmacia1.getHistoricoVendas()){
-            System.out.println("Venda ID: "+ venda.getId() + " | Funcionardio: " + venda.getFuncionario() + " | Data: " + venda.getData() + " | Valor : R$ "+ String.format("%.2f", venda.getValorTotal()));
-        }
+        farmacia1.exibirHistoricoVendas();
     }
 }
