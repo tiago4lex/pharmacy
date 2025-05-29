@@ -20,4 +20,16 @@ public class Rua {
     public void adicionarEndereco(Endereco e) {
         enderecos.add(e);
     }
+
+    public void exibirRelatorioDePeso() {
+        System.out.println("\nRelatório de Peso por Endereço - Rua " + identificador + ":\n");
+
+        for (Endereco e : enderecos) {
+            String codigo = e.getCodigoEndereco();
+            double pesoTotal = e.getPesoTotal();
+            int totalProdutos = e.getProdutos().size();
+
+            System.out.printf("Endereço: %s | Produtos: %d | Peso total: %.2f kg\n",codigo, totalProdutos, pesoTotal);
+        }
+    }
 }

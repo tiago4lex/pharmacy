@@ -66,4 +66,28 @@ public class Galpao {
             }
         }
     }
+
+    public void exibirRelatorioGeralDePeso() {
+    System.out.println("\nRelatório Geral de Peso - Galpão " + id + " (" + estado + ")\n");
+
+    for (Rua rua : ruas) {
+        System.out.println("Rua: " + rua.getIdentificador());
+
+        for (Endereco endereco : rua.getEnderecos()) {
+            String codigo = endereco.getCodigoEndereco();
+            double peso = endereco.getPesoTotal();
+            int totalProdutos = endereco.getProdutos().size();
+
+            String alerta = "";
+            if (endereco.isPrateleira() && peso > 20.0) {
+                alerta = " EXCEDE LIMITE!";
+            }
+
+            System.out.printf("  Endereço: %s | Produtos: %d | Peso total: %.2f kg%s\n",
+                    codigo, totalProdutos, peso, alerta);
+        }
+
+        System.out.println();
+    }
+    }
 }

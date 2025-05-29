@@ -23,18 +23,22 @@ public class Endereco {
 
     public boolean adicionarProduto(Produto produto) {
         double pesoTotal = getPesoTotal();
-        if (isPrateleira() && (pesoTotal + produto.getPeso() > 20.0)) {
-            System.out.println("Não é possível adicionar. Limite de 20kg por prateleira excedido.");
+        double novoPeso = produto.getPeso() * produto.getQuantidade();
+
+        if (isPrateleira() && (pesoTotal + novoPeso > 20.0)) {
+            System.out.printf("Erro: Produto '%s' excede o limite de 20kg nesta prateleira. (%.2fkg/20.00kg)%n",produto.getNome(), pesoTotal + novoPeso);
             return false;
         }
+
         produtos.add(produto);
+        System.out.printf("Produto '%s' adicionado à posição [%s]. Peso atual: %.2fkg%n",produto.getNome(), getCodigoEndereco(), pesoTotal + novoPeso);
         return true;
     }
 
     public double getPesoTotal() {
         double total = 0;
         for (Produto p : produtos) {
-            total += p.getPeso();
+            total += p.getPeso() * p.getQuantidade();
         }
         return total;
     }
