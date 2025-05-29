@@ -107,15 +107,8 @@ public class Farmacia {
 
     }
 
-    public void setFarmaceuticoResponsavel(String novoFarmaceutico) {
-    if (novoFarmaceutico != null && !novoFarmaceutico.trim().isEmpty()) {
-        this.farmaceuticoResponsavel = novoFarmaceutico;
-        System.out.println("Novo farmacêutico responsável: " + novoFarmaceutico);
-    } else {
-        System.out.println("Nome inválido para farmacêutico responsável.");
+    public String getFarmaceuticoResponsavel() {
+        return this.farmaceuticoResponsavel;
     }
-    }
-
-
 
 }
