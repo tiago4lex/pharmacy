@@ -19,19 +19,19 @@ public class Galpao {
         this.estoque = new HashMap<>();
     }
 
-    public String getId(){
+    public String getId() {
         return this.id;
     }
 
-    public String getFarmaceuticoResponsavel(){
+    public String getFarmaceuticoResponsavel() {
         return this.farmaceuticoResponsavel;
     }
 
-    public double getAliquota(){
+    public double getAliquota() {
         return this.aliquota;
     }
 
-    public String getEstado(){
+    public String getEstado() {
         return this.estado;
     }
 
@@ -68,26 +68,66 @@ public class Galpao {
     }
 
     public void exibirRelatorioGeralDePeso() {
-    System.out.println("\nRelatório Geral de Peso - Galpão " + id + " (" + estado + ")\n");
+        System.out.println("\nRelatório Geral de Peso - Galpão " + id + " (" + estado + ")\n");
 
-    for (Rua rua : ruas) {
-        System.out.println("Rua: " + rua.getIdentificador());
+        for (Rua rua : ruas) {
+            System.out.println("Rua: " + rua.getIdentificador());
 
-        for (Endereco endereco : rua.getEnderecos()) {
-            String codigo = endereco.getCodigoEndereco();
-            double peso = endereco.getPesoTotal();
-            int totalProdutos = endereco.getProdutos().size();
+            for (Endereco endereco : rua.getEnderecos()) {
+                String codigo = endereco.getCodigoEndereco();
+                double peso = endereco.getPesoTotal();
+                int totalProdutos = endereco.getProdutos().size();
 
-            String alerta = "";
-            if (endereco.isPrateleira() && peso > 20.0) {
-                alerta = " EXCEDE LIMITE!";
+                String alerta = "";
+                if (endereco.isPrateleira() && peso > 20.0) {
+                    alerta = " EXCEDE LIMITE!";
+                }
+
+                System.out.printf("  Endereço: %s | Produtos: %d | Peso total: %.2f kg%s\n",
+                        codigo, totalProdutos, peso, alerta);
             }
 
-            System.out.printf("  Endereço: %s | Produtos: %d | Peso total: %.2f kg%s\n",
-                    codigo, totalProdutos, peso, alerta);
+            System.out.println();
         }
-
-        System.out.println();
     }
+
+    public void listarProdutos() {
+        System.out.println("=== Produtos no Galpão ===");
+        for (Rua rua : ruas) {
+            for (Endereco endereco : rua.getEnderecos()) {
+                List<Produto> produtos = endereco.getProdutos();
+                if (!produtos.isEmpty()) {
+                    System.out.println("Endereço: " + endereco.getCodigoEndereco());
+                    for (Produto p : produtos) {
+                        System.out.println("- " + p.getNome() + " | Quantidade: " + p.getQuantidade());
+                    }
+                }
+            }
+        }
+    }
+
+    public void visualizarEstoque() {
+        System.out.println("\n=== Estrutura do Estoque do Galpão ===");
+        for (Rua rua : ruas) {
+            System.out.println("Rua: " + rua.getIdentificador());
+            for (Endereco endereco : rua.getEnderecos()) {
+                String codigo = endereco.getCodigoEndereco();
+                int quantidadeProdutos = endereco.getProdutos().size();
+                System.out.printf("  Endereço: %s | Produtos armazenados: %d\n", codigo, quantidadeProdutos);
+            }
+        }
+    }
+
+    public Endereco buscarEndereco(String ruaId, int setor, int prateleira) {
+        for (Rua rua : ruas) {
+            if (rua.getIdentificador().equalsIgnoreCase(ruaId)) {
+                for (Endereco endereco : rua.getEnderecos()) {
+                    if (endereco.getSetor() == setor && endereco.getPrateleira() == prateleira) {
+                        return endereco;
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

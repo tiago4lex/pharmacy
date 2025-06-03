@@ -46,7 +46,7 @@ public abstract class Produto {
         this.quantidade = quantidade;
     }
 
-    // Métodos obrigatórios para subclasses implementarem
+    // Método obrigatório para subclasses
     public abstract boolean precisaReceita();
 
     public double calcularPrecoVenda(double aliquota) {
@@ -58,4 +58,7 @@ public abstract class Produto {
     public boolean estaVencido() {
         return validade.isBefore(LocalDate.now());
     }
+
+    // Novo método para clonagem com quantidade desejada
+    public abstract Produto clonarComQuantidade(int quantidade);
 }

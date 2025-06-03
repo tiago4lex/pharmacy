@@ -11,4 +11,16 @@ public class MedicamentoSemReceita extends Medicamento {
     public boolean precisaReceita() {
         return false;
     }
+
+    @Override
+    public Produto clonarComQuantidade(int quantidade) {
+        return new MedicamentoSemReceita(
+            this.getNome(),
+            this.getPrecoCusto(),
+            this.getTaxaLucro(),
+            this.getValidade(),
+            quantidade,
+            this.getPeso()
+        );
+    }
 }

@@ -12,5 +12,15 @@ public class MedicamentoRestrito extends Medicamento {
         return true;
     }
 
-    
+    @Override
+    public Produto clonarComQuantidade(int quantidade) {
+        return new MedicamentoRestrito(
+            this.getNome(),
+            this.getPrecoCusto(),
+            this.getTaxaLucro(),
+            this.getValidade(),
+            quantidade,
+            this.getPeso()
+        );
+    }
 }

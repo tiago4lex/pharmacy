@@ -2,23 +2,23 @@ import java.util.*;
 
 public class Endereco {
     private String rua;
-    private int posicao;
-    private int altura;
+    private int setor;
+    private int prateleira;
     private List<Produto> produtos;
 
-    public Endereco(String rua, int posicao, int altura) {
+    public Endereco(String rua, int setor, int prateleira) {
         this.rua = rua;
-        this.posicao = posicao;
-        this.altura = altura;
+        this.setor = setor;
+        this.prateleira = prateleira;
         this.produtos = new ArrayList<>();
     }
 
     public String getCodigoEndereco() {
-        return String.format("%s%02d%02d", rua, posicao, altura);
+        return String.format("%s%02d%02d", rua, setor, prateleira);
     }
 
     public boolean isPrateleira() {
-        return altura != 0;
+        return prateleira != 0;
     }
 
     public boolean adicionarProduto(Produto produto) {
@@ -26,12 +26,14 @@ public class Endereco {
         double novoPeso = produto.getPeso() * produto.getQuantidade();
 
         if (isPrateleira() && (pesoTotal + novoPeso > 20.0)) {
-            System.out.printf("Erro: Produto '%s' excede o limite de 20kg nesta prateleira. (%.2fkg/20.00kg)%n",produto.getNome(), pesoTotal + novoPeso);
+            System.out.printf("Erro: Produto '%s' excede o limite de 20kg nesta prateleira. (%.2fkg/20.00kg)%n",
+                    produto.getNome(), pesoTotal + novoPeso);
             return false;
         }
 
         produtos.add(produto);
-        System.out.printf("Produto '%s' adicionado à posição [%s]. Peso atual: %.2fkg%n",produto.getNome(), getCodigoEndereco(), pesoTotal + novoPeso);
+        System.out.printf("Produto '%s' adicionado à posição [%s]. Peso atual: %.2fkg%n",
+                produto.getNome(), getCodigoEndereco(), pesoTotal + novoPeso);
         return true;
     }
 
@@ -45,5 +47,13 @@ public class Endereco {
 
     public List<Produto> getProdutos() {
         return produtos;
+    }
+
+    public int getSetor() {
+        return this.setor;
+    }
+
+    public int getPrateleira() {
+        return this.prateleira;
     }
 }
