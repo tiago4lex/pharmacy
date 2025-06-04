@@ -12,9 +12,13 @@ public class Main {
         ruaAA.adicionarEndereco(enderecoPadrao1);
         galpao.adicionarRua(ruaAA);
         Rua ruaAB = new Rua("AB");
-        Endereco enderecoPadrao2 = new Endereco("AB", 1, 2);
+        Endereco enderecoPadrao2 = new Endereco("AB", 1, 1);
         ruaAB.adicionarEndereco(enderecoPadrao2);
         galpao.adicionarRua(ruaAB);
+        Rua ruaAC = new Rua("AC");
+        Endereco enderecoPadrao3 = new Endereco("AC", 1, 1);
+        ruaAC.adicionarEndereco(enderecoPadrao3);
+        galpao.adicionarRua(ruaAC);
 
         Farmacia farmacia = new Farmacia("FAR#PR01", "Farmacia PR", "Dra. Juliana Dark");
         farmacia.setGalpaoPrincipal(galpao);
