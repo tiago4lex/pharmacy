@@ -26,8 +26,7 @@ public class Endereco {
         double novoPeso = produto.getPeso() * produto.getQuantidade();
 
         if (isPrateleira() && (pesoTotal + novoPeso > 20.0)) {
-            System.out.printf("Erro: Produto '%s' excede o limite de 20kg nesta prateleira. (%.2fkg/20.00kg)%n",
-                    produto.getNome(), pesoTotal + novoPeso);
+            System.out.printf("Erro: Produto '%s' excede o limite de 20kg nesta prateleira. (%.2fkg/20.00kg)%n",produto.getNome(), pesoTotal + novoPeso);
             return false;
         }
 

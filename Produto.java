@@ -17,7 +17,7 @@ public abstract class Produto {
         this.peso = Math.max(peso, 0);
     }
 
-    // Getters
+
     public String getNome() {
         return nome;
     }
@@ -46,19 +46,15 @@ public abstract class Produto {
         this.quantidade = quantidade;
     }
 
-    // Método obrigatório para subclasses
     public abstract boolean precisaReceita();
 
     public double calcularPrecoVenda(double aliquota) {
-        return precoCusto +
-               (precoCusto * taxaLucro) +
-               (precoCusto * aliquota);
+        return precoCusto + (precoCusto * taxaLucro) + (precoCusto * aliquota);
     }
 
     public boolean estaVencido() {
         return validade.isBefore(LocalDate.now());
     }
 
-    // Novo método para clonagem com quantidade desejada
     public abstract Produto clonarComQuantidade(int quantidade);
 }

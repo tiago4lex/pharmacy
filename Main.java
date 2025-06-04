@@ -18,7 +18,7 @@ public class Main {
 
         int opcao;
         do {
-            System.out.println("\n=== Menu Principal ===");
+            System.out.println("\n--- Menu Principal ---");
             System.out.println("1 - Galpão");
             System.out.println("2 - Farmácia");
             System.out.println("0 - Sair");
@@ -40,7 +40,7 @@ public class Main {
     public static void menuGalpao(Galpao galpao, Scanner sc) {
         int opcao;
         do {
-            System.out.println("\n=== Menu Galpão ===");
+            System.out.println("\n--- Menu Galpão ---");
             System.out.println("1 - Cadastrar produto");
             System.out.println("2 - Listar produtos");
             System.out.println("3 - Visualizar estrutura de estoque");
@@ -74,7 +74,7 @@ public class Main {
 
         System.out.print("Peso por unidade (kg): ");
         double peso = sc.nextDouble();
-        sc.nextLine(); // Limpar buffer
+        sc.nextLine();
 
         System.out.print("Tipo (com/sem/restrito): ");
         String tipo = sc.nextLine().trim().toLowerCase();
@@ -105,7 +105,7 @@ public class Main {
     public static void menuFarmacia(Farmacia farmacia, Scanner sc) {
         int opcao;
         do {
-            System.out.println("\n=== Menu Farmácia ===");
+            System.out.println("\n--- Menu Farmácia ---");
             System.out.println("1 - Vender produto");
             System.out.println("2 - Visualizar estoque");
             System.out.println("3 - Solicitar reposição de produto ao galpão");

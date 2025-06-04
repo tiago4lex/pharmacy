@@ -56,7 +56,7 @@ public class Galpao {
     }
 
     public void fornecerProduto(String nomeProduto, int quantidade) {
-        System.out.println("Função fornecerProduto ainda não implementada.");
+        System.out.println("ainda não implementado.");
     }
 
     public void verificarValidade() {
@@ -92,7 +92,7 @@ public class Galpao {
     }
 
     public void listarProdutos() {
-        System.out.println("=== Produtos no Galpão ===");
+        System.out.println("--- Produtos no Galpão ---");
         for (Rua rua : ruas) {
             for (Endereco endereco : rua.getEnderecos()) {
                 List<Produto> produtos = endereco.getProdutos();
@@ -107,7 +107,7 @@ public class Galpao {
     }
 
     public void visualizarEstoque() {
-        System.out.println("\n=== Estrutura do Estoque do Galpão ===");
+        System.out.println("\n--- Estrutura do Estoque do Galpão ---");
         for (Rua rua : ruas) {
             System.out.println("Rua: " + rua.getIdentificador());
             for (Endereco endereco : rua.getEnderecos()) {

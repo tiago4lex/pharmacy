@@ -23,7 +23,7 @@ public class Data {
         return ano;
     }
 
-    // Verificar se esta data é anterior à outra
+
     public boolean isAnterior(Data outra) {
         if (this.ano < outra.ano)
             return true;
@@ -34,7 +34,7 @@ public class Data {
         return false;
     }
 
-    // Retorna a data atual do sistema
+
     public static Data hoje() {
         LocalDate agora = LocalDate.now();
         return new Data(agora.getDayOfMonth(), agora.getMonthValue(), agora.getYear());

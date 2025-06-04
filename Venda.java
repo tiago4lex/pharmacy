@@ -22,12 +22,12 @@ public class Venda {
     private double calcularValorTotal() {
         double total = 0.0;
         for (Produto p : produtosVendidos) {
-            total += p.calcularPrecoVenda(aliquota);
+            total += p.calcularPrecoVenda(aliquota); //em produto
         }
         return total;
     }
 
-    // Getters
+    
     public int getId() {
         return this.id;
     }
