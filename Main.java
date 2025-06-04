@@ -1,3 +1,4 @@
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -5,16 +6,31 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Inicialização do galpão com uma rua e um endereço
         Galpao galpao = new Galpao("Galpao PR", "PR", 0.18, "Dr. Joao Oliveira");
         Rua ruaAA = new Rua("AA");
         Endereco enderecoPadrao = new Endereco("AA", 1, 1);
         ruaAA.adicionarEndereco(enderecoPadrao);
         galpao.adicionarRua(ruaAA);
 
-        // Criação da farmácia e vinculação com o galpão
         Farmacia farmacia = new Farmacia("FAR#PR01", "Farmacia PR", "Dra. Juliana Dark");
         farmacia.setGalpaoPrincipal(galpao);
+
+        String arquivoFarmacia = "farmacia.txt";
+        String arquivoGalpao = "galpao.txt";
+
+        File fileFarmacia = new File(arquivoFarmacia);
+        if (fileFarmacia.exists()) {
+            farmacia.carregarArquivo(arquivoFarmacia);
+        } else {
+            System.out.println("Nenhum arquivo salvo da farmácia encontrado. Nova sessão iniciada.");
+        }
+        
+        File fileGalpao = new File(arquivoGalpao);
+        if (fileGalpao.exists()) {
+            galpao.carregarArquivo(arquivoGalpao);
+        } else {
+            System.out.println("Nenhum arquivo salvo do galpão encontrado. Nova sessão iniciada.");
+        }
 
         int opcao;
         do {
@@ -29,7 +45,12 @@ public class Main {
             switch (opcao) {
                 case 1 -> menuGalpao(galpao, sc);
                 case 2 -> menuFarmacia(farmacia, sc);
-                case 0 -> System.out.println("Encerrando sistema...");
+                case 0 -> {
+                    System.out.println("Encerrando sistema...");
+                    farmacia.salvarArquivo(arquivoFarmacia);
+                    galpao.salvarArquivo(arquivoGalpao);
+                    System.out.println("Dados salvos com sucesso.");
+                }
                 default -> System.out.println("Opção inválida.");
             }
         } while (opcao != 0);

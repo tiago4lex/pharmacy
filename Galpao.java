@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Galpao {
@@ -130,4 +135,89 @@ public class Galpao {
         }
         return null;
     }
+
+    public void salvarArquivo(String caminho) {
+    try (FileWriter writer = new FileWriter(caminho)) {
+        writer.write(this.id + ";" + this.estado + ";" + this.aliquota + ";" + this.farmaceuticoResponsavel + "\n");
+        for (Rua rua : ruas) {
+            for (Endereco endereco : rua.getEnderecos()) {
+                for (Produto produto : endereco.getProdutos()) {
+                    writer.write(rua.getIdentificador() + ";" + endereco.getSetor() + ";" + endereco.getPrateleira() + ";"
+                        + produto.getNome() + ";" + produto.getPrecoCusto() + ";" + produto.getTaxaLucro() + ";"
+                        + produto.getValidade() + ";" + produto.getQuantidade() + ";" + produto.getPeso() + ";"
+                        + produto.getClass().getSimpleName() + "\n");
+                }
+            }
+        }
+    } catch (IOException e) {
+        System.out.println("Erro ao salvar galpão: " + e.getMessage());
+    }
+
+    }
+
+    public void carregarArquivo(String caminho) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(caminho))) {
+            String linha = reader.readLine();
+            if (linha != null) {
+                String[] dados = linha.split(";");
+                this.id = dados[0];
+                this.estado = dados[1];
+                this.aliquota = Double.parseDouble(dados[2]);
+                this.farmaceuticoResponsavel = dados[3];
+            }
+
+            String linhaProduto;
+            while ((linhaProduto = reader.readLine()) != null) {
+                String[] dados = linhaProduto.split(";");
+                String ruaId = dados[0];
+                int setor = Integer.parseInt(dados[1]);
+                int prateleira = Integer.parseInt(dados[2]);
+                String nome = dados[3];
+                double preco = Double.parseDouble(dados[4]);
+                double lucro = Double.parseDouble(dados[5]);
+                LocalDate validade = LocalDate.parse(dados[6]);
+                int quantidade = Integer.parseInt(dados[7]);
+                double peso = Double.parseDouble(dados[8]);
+                String tipo = dados[9];
+
+                Produto produto = switch (tipo) {
+                    case "MedicamentoComReceita" -> new MedicamentoComReceita(nome, preco, lucro, validade, quantidade, peso);
+                    case "MedicamentoSemReceita" -> new MedicamentoSemReceita(nome, preco, lucro, validade, quantidade, peso);
+                    case "MedicamentoRestrito" -> new MedicamentoRestrito(nome, preco, lucro, validade, quantidade, peso);
+                    default -> null;
+                };
+
+                if (produto != null) {
+                    Rua rua = new Rua(ruaId);
+                    Endereco endereco = new Endereco(ruaId, setor, prateleira);
+
+                    boolean novaRua = true;
+                    for (Rua r : ruas) {
+                        if (r.getIdentificador().equalsIgnoreCase(ruaId)) {
+                            rua = r;
+                            novaRua = false;
+                            break;
+                        }
+                    }
+                    if (novaRua) ruas.add(rua);
+
+                    boolean novoEndereco = true;
+                    for (Endereco e : rua.getEnderecos()) {
+                        if (e.getSetor() == setor && e.getPrateleira() == prateleira) {
+                            endereco = e;
+                            novoEndereco = false;
+                            break;
+                        }
+                    }
+                    if (novoEndereco) rua.adicionarEndereco(endereco);
+
+                    endereco.adicionarProduto(produto);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar galpão: " + e.getMessage());
+        }
+    }
+
+
 }

@@ -1,0 +1,2 @@
+Galpao PR;PR;0.18;Dr. Joao Oliveira
+AA;1;1;dipirona;20.0;0.15;2026-01-01;10;0.1;MedicamentoSemReceita
