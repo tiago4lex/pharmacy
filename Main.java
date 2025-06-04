@@ -8,9 +8,13 @@ public class Main {
 
         Galpao galpao = new Galpao("Galpao PR", "PR", 0.18, "Dr. Joao Oliveira");
         Rua ruaAA = new Rua("AA");
-        Endereco enderecoPadrao = new Endereco("AA", 1, 1);
-        ruaAA.adicionarEndereco(enderecoPadrao);
+        Endereco enderecoPadrao1 = new Endereco("AA", 1, 1);
+        ruaAA.adicionarEndereco(enderecoPadrao1);
         galpao.adicionarRua(ruaAA);
+        Rua ruaAB = new Rua("AB");
+        Endereco enderecoPadrao2 = new Endereco("AB", 1, 2);
+        ruaAB.adicionarEndereco(enderecoPadrao2);
+        galpao.adicionarRua(ruaAB);
 
         Farmacia farmacia = new Farmacia("FAR#PR01", "Farmacia PR", "Dra. Juliana Dark");
         farmacia.setGalpaoPrincipal(galpao);
