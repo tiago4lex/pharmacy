@@ -24,7 +24,7 @@ public class Main {
         } else {
             System.out.println("Nenhum arquivo salvo da farmácia encontrado. Nova sessão iniciada.");
         }
-        
+
         File fileGalpao = new File(arquivoGalpao);
         if (fileGalpao.exists()) {
             galpao.carregarArquivo(arquivoGalpao);
@@ -159,6 +159,7 @@ public class Main {
             return;
         }
 
+        Receita receita = null;
         if (produto.precisaReceita()) {
             System.out.print("Possui receita? (s/n): ");
             String resposta = sc.nextLine();
@@ -166,13 +167,21 @@ public class Main {
                 System.out.println("Venda cancelada: receita obrigatória.");
                 return;
             }
+
+            System.out.print("Nome do médico: ");
+            String nomeMedico = sc.nextLine();
+            System.out.print("CRM do médico: ");
+            String crm = sc.nextLine();
+            System.out.print("Nome do paciente: ");
+            String nomePaciente = sc.nextLine();
+            receita = new Receita(nomeMedico, crm, nomePaciente);
         }
 
-        boolean sucesso = farmacia.processarVenda(produto, quantidade);
-        if (sucesso) {
+        Venda venda = farmacia.venderProduto(produto, quantidade, receita, "Funcionário 1");
+        if (venda != null) {
             System.out.println("Venda realizada com sucesso!");
         } else {
-            System.out.println("Falha na venda. Verifique estoque e validade.");
+            System.out.println("Falha na venda. Verifique estoque, validade ou receita.");
         }
     }
 
