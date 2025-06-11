@@ -31,8 +31,7 @@ public class Endereco {
         }
 
         produtos.add(produto);
-        System.out.printf("Produto '%s' adicionado à posição [%s]. Peso atual: %.2fkg%n",
-                produto.getNome(), getCodigoEndereco(), pesoTotal + novoPeso);
+        System.out.printf("Produto '%s' adicionado à posição [%s]. Peso atual: %.2fkg%n",produto.getNome(), getCodigoEndereco(), pesoTotal + novoPeso);
         return true;
     }
 

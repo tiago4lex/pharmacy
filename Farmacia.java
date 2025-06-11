@@ -35,10 +35,7 @@ public class Farmacia {
         }
 
         if (produto.precisaReceita()) {
-            if (receita == null ||
-                receita.getCrm() == null || receita.getCrm().isEmpty() ||
-                receita.getNomeMedico() == null || receita.getNomeMedico().isEmpty() ||
-                receita.getNomePaciente() == null || receita.getNomePaciente().isEmpty()) {
+            if (receita == null || receita.getCrm() == null || receita.getCrm().isEmpty() || receita.getNomeMedico() == null || receita.getNomeMedico().isEmpty() || receita.getNomePaciente() == null || receita.getNomePaciente().isEmpty()) {
                 System.out.println("Receita inválida ou incompleta. Venda não liberada!");
                 return null;
             }
