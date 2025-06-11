@@ -1,2 +1,3 @@
 FAR#PR01;Farmacia PR;Dra. Juliana Dark
 dipirona;20.0;0.15;2026-01-01;5;0.1;4;MedicamentoSemReceita
+Amoxilina;12.0;0.15;2026-01-01;5;0.1;4;MedicamentoSemReceita

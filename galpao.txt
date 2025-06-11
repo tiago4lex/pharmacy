@@ -1,3 +1,4 @@
 Galpao PR;PR;0.18;Dr. Joao Oliveira
 AA;1;1;dipirona;20.0;0.15;2026-01-01;10;0.1;MedicamentoSemReceita
 AA;1;1;torsilax;15.99;0.12;2026-03-02;20;0.3;MedicamentoSemReceita
+AA;1;1;Amoxilina;12.0;0.15;2026-01-01;20;0.1;MedicamentoSemReceita
